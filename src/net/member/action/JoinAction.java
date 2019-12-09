@@ -27,7 +27,7 @@ public class JoinAction implements Action {
 		String tel = request.getParameter("mem_phone1")+"-"
 						+request.getParameter("mem_phone2")+"-"
 						+request.getParameter("mem_phone3");
-		
+	
 		dto.setMEM_TEL(tel);
 		dto.setMEM_GENDER(request.getParameter("mem_gender"));
 		memberdao.insertMember(dto);

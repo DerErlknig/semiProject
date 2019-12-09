@@ -19,7 +19,7 @@
 	</tr>
 	<tr>
 		<td>생년월일
-			<input type="text" name="mem_birthday" size="20" placeholder="예)19920301">
+			<input type="text" name="mem_birthday" size="20" placeholder="예)1992-03-01">
 	<tr>
 		<td>주소
 			<input type="text" name="mem_address" size="20"/>
