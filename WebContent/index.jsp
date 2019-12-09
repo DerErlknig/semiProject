@@ -12,7 +12,7 @@
 //	String id=(String)session.getAttribute("id");
 //	System.out.println(id);
 //	if(id==null){
-		response.sendRedirect("/Movie/weather.If");
+		response.sendRedirect("/Movie/loginform.me");
 //	}else{
 //		response.sendRedirect("Movie/main.me");
 //	}
