@@ -16,7 +16,7 @@ import net.movieInfo.db.MovieInfoBean;
 import net.movieInfo.db.MovieInfoDAO;
 
 public class WeatherAction implements Action {
-
+//날씨 파싱
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		MovieInfoBean info = new MovieInfoBean();
