@@ -43,7 +43,9 @@ public class MemberDAO {
 				String memberpw=rs.getString("MEM_PW");
 				
 				if(memberpw.equals(pw)){
-					x=1;
+					if(id.equals("admin")) {
+						x=2;
+					}else {x=1;}
 				}else{
 					x=0;
 				}

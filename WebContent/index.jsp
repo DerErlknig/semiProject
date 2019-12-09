@@ -9,13 +9,13 @@
 <body>
 	<%
 	
-//	String id=(String)session.getAttribute("id");
-//	System.out.println(id);
-//	if(id==null){
+	String id=(String)session.getAttribute("id");
+	System.out.println(id);
+	if(id==null){
 		response.sendRedirect("/Movie/loginform.me");
-//	}else{
-//		response.sendRedirect("Movie/main.me");
-//	}
+	}else{
+		response.sendRedirect("Movie/main.me");
+	}
 		
 		
 	%>

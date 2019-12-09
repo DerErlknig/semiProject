@@ -26,6 +26,10 @@ public class LoginAction implements Action{
 			forward.setPath("./main.jsp"); 
 			session.setAttribute("id", id);
 			return forward;
+		}else if(check==2) {
+			forward.setRedirect(true);
+			forward.setPath("./admin/admin.jsp"); 
+			return forward;
 		}else if(check==0) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
