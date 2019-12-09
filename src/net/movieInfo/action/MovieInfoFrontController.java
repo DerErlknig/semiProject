@@ -40,6 +40,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 			} catch (Exception e) {
 				e.getMessage();
 			}
+		}
 	
 		
 		if(forward !=null) {
@@ -50,7 +51,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 						.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
+		
 		}
 	}
-}
 }
