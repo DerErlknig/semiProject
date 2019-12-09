@@ -29,7 +29,7 @@ function check(){
 
 </head>
 <body>
-	<form action="" align="center" height="30px" name="loginform" onsubmit="return check()">
+	<form action="./login.me" align="center" height="30px" name="loginform" onsubmit="return check()">
 		<h3>로그인 하세요.</h3>
 		<label align="center" font-size="20">I D : </label>
 		<input type="text" name="mem_id" size="20"><br>

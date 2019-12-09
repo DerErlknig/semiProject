@@ -16,10 +16,11 @@ public class LoginAction implements Action{
 		MemberDAO memberdao=new MemberDAO();
 		HttpSession session=request.getSession();
 		
-		String id=request.getParameter("MEMBER_ID");
-		String pass=request.getParameter("MEMBER_PW");		
+		String id=request.getParameter("mem_id");
+		String pass=request.getParameter("mem_pass");	
+
 		int check=memberdao.userLogin(id, pass);
-		
+
 		if(check==1) {
 			forward.setRedirect(true);
 			forward.setPath("./main.jsp"); 

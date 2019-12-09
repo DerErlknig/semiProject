@@ -35,7 +35,7 @@ public class MemberDAO {
 		
 		try{
 			con = ds.getConnection();
-			sql="select MEM_PW from member where MEM_ID=?";
+			sql="select MEM_PW from MEMBER where MEM_ID=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
