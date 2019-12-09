@@ -1,0 +1,409 @@
+/* 영화 */
+DROP TABLE movie 
+	CASCADE CONSTRAINTS;
+
+/* 기분 */
+DROP TABLE feeling 
+	CASCADE CONSTRAINTS;
+
+/* 영화_기분 */
+DROP TABLE movie_feeling 
+	CASCADE CONSTRAINTS;
+
+/* 장소 */
+DROP TABLE location 
+	CASCADE CONSTRAINTS;
+
+/* 영화_장소 */
+DROP TABLE movie_loction 
+	CASCADE CONSTRAINTS;
+
+/* 회원 정보 */
+DROP TABLE member 
+	CASCADE CONSTRAINTS;
+
+/* 장르 */
+DROP TABLE genre 
+	CASCADE CONSTRAINTS;
+
+/* 영화_장르 */
+DROP TABLE movie_genre 
+	CASCADE CONSTRAINTS;
+
+/* 출연진 */
+DROP TABLE staff 
+	CASCADE CONSTRAINTS;
+
+/* 게시판 정보 */
+DROP TABLE review 
+	CASCADE CONSTRAINTS;
+
+/* 선호 정보 */
+DROP TABLE preference 
+	CASCADE CONSTRAINTS;
+
+/* 영화 */
+CREATE TABLE movie (
+	mov_title VARCHAR2(20) NOT NULL, /* 영화 이름 */
+	mov_date DATE NOT NULL, /* 개봉일 */
+	mov_time NUMBER NOT NULL, /* 상영시간 */
+	mov_rating VARCHAR2(20) NOT NULL, /* 시청 연령 */
+	mov_poster VARCHAR2(20) NOT NULL /* 포스터 */
+);
+
+COMMENT ON TABLE movie IS '영화';
+
+COMMENT ON COLUMN movie.mov_title IS '영화 이름';
+
+COMMENT ON COLUMN movie.mov_date IS '개봉일';
+
+COMMENT ON COLUMN movie.mov_time IS '상영시간';
+
+COMMENT ON COLUMN movie.mov_rating IS '시청 연령';
+
+COMMENT ON COLUMN movie.mov_poster IS '포스터';
+
+CREATE UNIQUE INDEX PK_movie
+	ON movie (
+		mov_title ASC
+	);
+
+ALTER TABLE movie
+	ADD
+		CONSTRAINT PK_movie
+		PRIMARY KEY (
+			mov_title
+		);
+
+/* 기분 */
+CREATE TABLE feeling (
+	feeling VARCHAR2(20) NOT NULL /* 기분 */
+);
+
+COMMENT ON TABLE feeling IS '기분';
+
+COMMENT ON COLUMN feeling.feeling IS '기분';
+
+CREATE UNIQUE INDEX PK_feeling
+	ON feeling (
+		feeling ASC
+	);
+
+ALTER TABLE feeling
+	ADD
+		CONSTRAINT PK_feeling
+		PRIMARY KEY (
+			feeling
+		);
+
+/* 영화_기분 */
+CREATE TABLE movie_feeling (
+	mov_title VARCHAR2(20) NOT NULL, /* 영화 이름 */
+	feeling VARCHAR2(20) /* 기분 */
+);
+
+COMMENT ON TABLE movie_feeling IS '영화_기분';
+
+COMMENT ON COLUMN movie_feeling.mov_title IS '영화 이름';
+
+COMMENT ON COLUMN movie_feeling.feeling IS '기분';
+
+/* 장소 */
+CREATE TABLE location (
+	loction VARCHAR2(20) NOT NULL /* 장소 */
+);
+
+COMMENT ON TABLE location IS '장소';
+
+COMMENT ON COLUMN location.loction IS '장소';
+
+CREATE UNIQUE INDEX PK_location
+	ON location (
+		loction ASC
+	);
+
+ALTER TABLE location
+	ADD
+		CONSTRAINT PK_location
+		PRIMARY KEY (
+			loction
+		);
+
+/* 영화_장소 */
+CREATE TABLE movie_loction (
+	mov_title VARCHAR2(20) NOT NULL, /* 영화 이름 */
+	loction VARCHAR2(20) /* 장소 */
+);
+
+COMMENT ON TABLE movie_loction IS '영화_장소';
+
+COMMENT ON COLUMN movie_loction.mov_title IS '영화 이름';
+
+COMMENT ON COLUMN movie_loction.loction IS '장소';
+
+/* 회원 정보 */
+CREATE TABLE member (
+	mem_id VARCHAR2(20) NOT NULL, /* 아이디 */
+	mem_name VARCHAR2(10) NOT NULL, /* 이름 */
+	mem_pw VARCHAR2(20) NOT NULL, /* 비번 */
+	mem_address VARCHAR2(20) NOT NULL, /* 주소 */
+	mem_birth DATE NOT NULL, /* 생년월일 */
+	mem_gender VARCHAR2(6) NOT NULL, /* 성별 */
+	mem_tel VARCHAR2(20) NOT NULL /* 전화번호 */
+);
+
+COMMENT ON TABLE member IS '회원 정보';
+
+COMMENT ON COLUMN member.mem_id IS '아이디';
+
+COMMENT ON COLUMN member.mem_name IS '이름';
+
+COMMENT ON COLUMN member.mem_pw IS '비번';
+
+COMMENT ON COLUMN member.mem_address IS '주소';
+
+COMMENT ON COLUMN member.mem_birth IS '생년월일';
+
+COMMENT ON COLUMN member.mem_gender IS '성별';
+
+COMMENT ON COLUMN member.mem_tel IS '전화번호';
+
+CREATE UNIQUE INDEX PK_member
+	ON member (
+		mem_id ASC
+	);
+
+ALTER TABLE member
+	ADD
+		CONSTRAINT PK_member
+		PRIMARY KEY (
+			mem_id
+		);
+
+/* 장르 */
+CREATE TABLE genre (
+	genre VARCHAR2(10) NOT NULL /* 장르 */
+);
+
+COMMENT ON TABLE genre IS '장르';
+
+COMMENT ON COLUMN genre.genre IS '장르';
+
+CREATE UNIQUE INDEX PK_genre
+	ON genre (
+		genre ASC
+	);
+
+ALTER TABLE genre
+	ADD
+		CONSTRAINT PK_genre
+		PRIMARY KEY (
+			genre
+		);
+
+/* 영화_장르 */
+CREATE TABLE movie_genre (
+	mov_title VARCHAR2(20) NOT NULL, /* 영화 이름 */
+	genre VARCHAR2(10) /* 장르 */
+);
+
+COMMENT ON TABLE movie_genre IS '영화_장르';
+
+COMMENT ON COLUMN movie_genre.mov_title IS '영화 이름';
+
+COMMENT ON COLUMN movie_genre.genre IS '장르';
+
+/* 출연진 */
+CREATE TABLE staff (
+	mov_title VARCHAR2(20) NOT NULL, /* 영화 이름 */
+	director VARCHAR2(20) NOT NULL, /* 감독 */
+	actors VARCHAR2(40) NOT NULL /* 배우 */
+);
+
+COMMENT ON TABLE staff IS '출연진';
+
+COMMENT ON COLUMN staff.mov_title IS '영화 이름';
+
+COMMENT ON COLUMN staff.director IS '감독';
+
+COMMENT ON COLUMN staff.actors IS '배우';
+
+CREATE UNIQUE INDEX PK_staff
+	ON staff (
+		mov_title ASC
+	);
+
+ALTER TABLE staff
+	ADD
+		CONSTRAINT PK_staff
+		PRIMARY KEY (
+			mov_title
+		);
+
+/* 게시판 정보 */
+CREATE TABLE review (
+	mov_title VARCHAR2(20) NOT NULL, /* 영화 이름 */
+	mem_id VARCHAR2(20) NOT NULL, /* 아이디 */
+	review VARCHAR2(1000) NOT NULL, /* 한줄평 */
+	star NUMBER NOT NULL, /* 별점 */
+	rev_date DATE NOT NULL /* 작성일 */
+);
+
+COMMENT ON TABLE review IS '게시판 정보';
+
+COMMENT ON COLUMN review.mov_title IS '영화 이름';
+
+COMMENT ON COLUMN review.mem_id IS '아이디';
+
+COMMENT ON COLUMN review.review IS '한줄평';
+
+COMMENT ON COLUMN review.star IS '별점';
+
+COMMENT ON COLUMN review.rev_date IS '작성일';
+
+/* 선호 정보 */
+CREATE TABLE preference (
+	mem_id VARCHAR2(20) NOT NULL, /* 아이디 */
+	loction VARCHAR2(20), /* 장소 */
+	genre VARCHAR2(10) /* 장르 */
+);
+
+COMMENT ON TABLE preference IS '선호 정보';
+
+COMMENT ON COLUMN preference.mem_id IS '아이디';
+
+COMMENT ON COLUMN preference.loction IS '장소';
+
+COMMENT ON COLUMN preference.genre IS '장르';
+
+CREATE UNIQUE INDEX PK_preference
+	ON preference (
+		mem_id ASC
+	);
+
+ALTER TABLE preference
+	ADD
+		CONSTRAINT PK_preference
+		PRIMARY KEY (
+			mem_id
+		);
+
+ALTER TABLE movie_feeling
+	ADD
+		CONSTRAINT FK_feeling_TO_movie_feeling
+		FOREIGN KEY (
+			feeling
+		)
+		REFERENCES feeling (
+			feeling
+		);
+
+ALTER TABLE movie_feeling
+	ADD
+		CONSTRAINT FK_movie_TO_movie_feeling
+		FOREIGN KEY (
+			mov_title
+		)
+		REFERENCES movie (
+			mov_title
+		);
+
+ALTER TABLE movie_loction
+	ADD
+		CONSTRAINT FK_location_TO_movie_loction
+		FOREIGN KEY (
+			loction
+		)
+		REFERENCES location (
+			loction
+		);
+
+ALTER TABLE movie_loction
+	ADD
+		CONSTRAINT FK_movie_TO_movie_loction
+		FOREIGN KEY (
+			mov_title
+		)
+		REFERENCES movie (
+			mov_title
+		);
+
+ALTER TABLE movie_genre
+	ADD
+		CONSTRAINT FK_movie_TO_movie_genre
+		FOREIGN KEY (
+			mov_title
+		)
+		REFERENCES movie (
+			mov_title
+		);
+
+ALTER TABLE movie_genre
+	ADD
+		CONSTRAINT FK_genre_TO_movie_genre
+		FOREIGN KEY (
+			genre
+		)
+		REFERENCES genre (
+			genre
+		);
+
+ALTER TABLE staff
+	ADD
+		CONSTRAINT FK_movie_TO_staff
+		FOREIGN KEY (
+			mov_title
+		)
+		REFERENCES movie (
+			mov_title
+		);
+
+ALTER TABLE review
+	ADD
+		CONSTRAINT FK_movie_TO_review
+		FOREIGN KEY (
+			mov_title
+		)
+		REFERENCES movie (
+			mov_title
+		);
+
+ALTER TABLE review
+	ADD
+		CONSTRAINT FK_member_TO_review
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member (
+			mem_id
+		);
+
+ALTER TABLE preference
+	ADD
+		CONSTRAINT FK_member_TO_preference
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member (
+			mem_id
+		);
+
+ALTER TABLE preference
+	ADD
+		CONSTRAINT FK_location_TO_preference
+		FOREIGN KEY (
+			loction
+		)
+		REFERENCES location (
+			loction
+		);
+
+ALTER TABLE preference
+	ADD
+		CONSTRAINT FK_genre_TO_preference
+		FOREIGN KEY (
+			genre
+		)
+		REFERENCES genre (
+			genre
+		);
