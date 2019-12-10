@@ -14,8 +14,8 @@
 	if(id==null){
 		//response.sendRedirect("/Movie/loginform.me");
 		//response.sendRedirect("/Movie/memberListAction.ad");
-		response.sendRedirect("/Movie/detailInfo.If");
-		//response.sendRedirect("/Movie/weather.If");
+		//response.sendRedirect("/Movie/detailInfo.If");
+		response.sendRedirect("/Movie/weather.If");
 	}else{
 		response.sendRedirect("/Movie/main.me");
 	}

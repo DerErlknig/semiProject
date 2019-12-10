@@ -59,18 +59,17 @@ public class WeatherAction implements Action {
 			System.out.println(uri);
 			xmlDoc = parser.parse(uri);
 			
-			NodeList rssLoc = xmlDoc.getElementsByTagName("location");			
+			NodeList rssLoc = xmlDoc.getElementsByTagName("data");			
 			NodeList rssData = rssLoc.item(0).getChildNodes();
 			
 			for(int i=0;i<rssData.getLength();i++) {
 				
-				NodeList rssInfo = rssData.item(i).getChildNodes();
 
-					if(rssInfo.item(j).getNodeName().equals("tm")) {
-						System.out.println(rssInfo.item(j).getTextContent());
+					if(rssData.item(i).getNodeName().equals("tm")) {
+						System.out.println(rssData.item(i).getTextContent());
 					}
-					if(rssInfo.item(j).getNodeName().equals("wf")) {
-						System.out.println(rssInfo.item(j).getTextContent());
+					if(rssData.item(i).getNodeName().equals("wf")) {
+						System.out.println(rssData.item(i).getTextContent());
 						movieList = infoDAO.weatherSelect();
 					}
 
