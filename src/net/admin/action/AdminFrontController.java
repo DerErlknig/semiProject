@@ -30,7 +30,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 		String command = requestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action =null;
-		
+		System.out.println(command);
 		if(command.equals("/admin.ad")) {
 			forward = new ActionForward();
 			forward.setRedirect(false);
@@ -43,6 +43,23 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 			} catch (Exception e) {
 				e.getMessage();
 			}
+		}else if(command.equals("/adminMember.ad")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/admin/adminMember.jsp");
+		}else if(command.equals("/movieDeleteAction.ad")) {
+			
+		}else if(command.equals("/memberListAction.ad")) {
+			
+			action = new MemberListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.getMessage();
+			}
+			
+		}else if(command.equals("/memberDeleteAction.ad")) {
+			
 		}
 		
 		

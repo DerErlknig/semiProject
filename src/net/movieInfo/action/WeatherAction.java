@@ -65,15 +65,15 @@ public class WeatherAction implements Action {
 			for(int i=0;i<rssData.getLength();i++) {
 				
 				NodeList rssInfo = rssData.item(i).getChildNodes();
-				for(int j=0;j<rssInfo.getLength();j++) {
-					if(rssInfo.item(j).getNodeName().equals("tmEf")) {
+
+					if(rssInfo.item(j).getNodeName().equals("tm")) {
 						System.out.println(rssInfo.item(j).getTextContent());
 					}
 					if(rssInfo.item(j).getNodeName().equals("wf")) {
 						System.out.println(rssInfo.item(j).getTextContent());
 						movieList = infoDAO.weatherSelect();
 					}
-				}
+
 			}
 	
 			
@@ -82,7 +82,7 @@ public class WeatherAction implements Action {
 		
 		request.setAttribute("boardlist", movieList);
 		forward.setRedirect(false);
- 		forward.setPath("");
+ 		forward.setPath("-");
 		
 		return forward;
 	}

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -55,6 +57,46 @@ public class AdminDAO {
 		}
 		return result;
 		
+	}
+	
+	public List selectMember() {
+		List list = new ArrayList();
+		
+		
+		String sql = "";
+		
+		try {
+			con = ds.getConnection();
+			sql = "select * from member";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				MemberBean memBean = new MemberBean();
+				
+				memBean.setMEM_ID((rs.getString("MEM_ID")));
+				memBean.setMEM_NAME(rs.getString("MEM_NAME"));
+				memBean.setMEM_PW(rs.getString("MEM_PW"));
+				memBean.setMEM_ADDRESS(rs.getString("MEM_ADDRESS"));
+				memBean.setMEM_BIRTH(rs.getString("MEM_BIRTH"));
+				memBean.setMEM_GENDER(rs.getString("MEM_GENDER"));
+				memBean.setMEM_TEL(rs.getString("MEM_TEL"));
+			
+				list.add(memBean);
+			}
+			return list;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		
+		return null;
 	}
 	
 }

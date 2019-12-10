@@ -7,8 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.member.action.LoginAction;
 import net.movieInfo.action.Action;
 import net.movieInfo.action.ActionForward;
 
@@ -33,7 +31,19 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 		
 		System.out.println(command);
 	
-		if(command.equals("/weather.If")) {
+		if(command.equals("/detailInfo.If")) {
+			action = new DetailInfoAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.getMessage();
+			}
+		}else if(command.equals("/showDetailInfo.If")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/info/movieDetailInfo.jsp");
+			
+		}else if(command.equals("/weather.If")) {
 			action = new WeatherAction();
 			try {
 				forward = action.execute(request, response);

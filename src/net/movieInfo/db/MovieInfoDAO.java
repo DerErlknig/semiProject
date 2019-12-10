@@ -35,22 +35,42 @@ public class MovieInfoDAO {
 	
 	
 	
-	public List movieList() {
-		List itemList = new ArrayList();
-		String sql = "select ";
+	public List movieInfo() {
+		List list = new ArrayList();
+		
+		
+		String sql = "";
 		
 		try {
 			con = ds.getConnection();
-			
-			
-			
-			
-			
-			
+			sql = "select * from movie";
+			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-		}catch(Exception ex) {
 			
+			while(rs.next()) {
+				
+				MovieInfoBean infoBean = new MovieInfoBean();
+				
+				infoBean.setMOV_TITLE(rs.getString("MOV_TITLE"));
+				infoBean.setMOV_DATE(rs.getDate("MOV_DATE"));
+				infoBean.setMOV_TIME(rs.getInt("MOV_TIME"));
+				infoBean.setMOV_RATING(rs.getString("MOV_RATING"));
+				infoBean.setMOV_STORY(rs.getString("MOV_STORY"));
+				infoBean.setMOV_POSTER(rs.getString("MOV_POSTER"));
+				
+				list.add(infoBean);
+			}
+			return list;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
 		}
+		
 		return null;
 	}
 	
