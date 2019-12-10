@@ -23,7 +23,7 @@ public class LoginAction implements Action{
 
 		if(check==1) {
 			forward.setRedirect(true);
-			forward.setPath("./main.jsp"); 
+			forward.setPath("./main_page.jsp"); 
 			session.setAttribute("id", id);
 			return forward;
 		}else if(check==2) {

@@ -35,27 +35,29 @@ public class WeatherAction implements Action {
 			String userLoc =infoDAO.getLoc(id);
 			String locID = "";
 			
-			if(userLoc.equals("서울")||userLoc.equals("경기도")) {
-				locID = "109";
+			if(userLoc.equals("서울")) {
+				locID = "1168066000";//강남구 기준
+			}else if(userLoc.equals("경기도")) {
+				locID = "4182025000";//가평군 기준
 			}else if(userLoc.equals("강원도")) {
-					locID = "105";
+				locID = "4215061500";//강릉기준
 			}else if(userLoc.equals("충청북도")) {
-					locID = "131";
+				locID = "4313053500";//충주 기준
 			}else if(userLoc.equals("충청남도")) {
-				locID = "133";
+				locID = "4423040000";//논산 기준
 			}else if(userLoc.equals("전라북도")) {
-				locID = "146";
+				locID = "4579031000";//고창군
 			}else if(userLoc.equals("전라남도")) {
-				locID = "156";
+				locID = "4611056500";//목포기준
 			}else if(userLoc.equals("경상북도")) {
-				locID = "143";
+				locID = "4711334000";//포항기준
 			}else if(userLoc.equals("경상남도")) {
-				locID = "159";
+				locID = "4831034000";//거제
 			}else if(userLoc.equals("제주도")) {
-				locID = "184";
+				locID = "5013025300";
 			}
 			
-			String uri = "http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId="+locID;
+			String uri = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone="+userLoc;
 			System.out.println(uri);
 			xmlDoc = parser.parse(uri);
 			
@@ -63,13 +65,10 @@ public class WeatherAction implements Action {
 			NodeList rssData = rssLoc.item(0).getChildNodes();
 			
 			for(int i=0;i<rssData.getLength();i++) {
-				
 
-					if(rssData.item(i).getNodeName().equals("tm")) {
-						System.out.println(rssData.item(i).getTextContent());
-					}
-					if(rssData.item(i).getNodeName().equals("wf")) {
-						System.out.println(rssData.item(i).getTextContent());
+					if(rssData.item(i).getNodeName().equals("wfKor")) {
+						String weather = rssData.item(i).getTextContent();
+						System.out.println(weather);
 						movieList = infoDAO.weatherSelect();
 					}
 

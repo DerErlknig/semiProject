@@ -30,7 +30,29 @@ public class MovieInfoDAO {
 	}
 	
 	public String getLoc(String id) throws SQLException{
-		return "서울";
+		
+		String sql = "";
+		
+		try {
+			con = ds.getConnection();
+			sql = "select MEM_ADDRESS from member where MEM_ID=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+					
+			return rs.getString("MEM_ID");
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		
+		return null;
 	}
 	
 	
