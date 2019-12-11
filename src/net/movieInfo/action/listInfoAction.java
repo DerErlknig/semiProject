@@ -16,7 +16,7 @@ public class listInfoAction implements Action  {
 		ActionForward forward = new ActionForward();
 		MovieInfoDAO infoDAO = new MovieInfoDAO();
 		List infoList = new ArrayList();
-		infoList = infoDAO.movieInfo();
+		infoList = infoDAO.movieList();
 		
 		request.setAttribute("infoList", infoList);
 		forward.setPath("/showListInfo.If");

@@ -57,7 +57,7 @@ public class MovieInfoDAO {
 	
 	
 	
-	public List movieInfo() {
+	public List movieList() {
 		List list = new ArrayList();
 		
 		String sql = "";
@@ -112,13 +112,15 @@ public class MovieInfoDAO {
 public List searchMovie(String movieName) {
 		
 		List list = new ArrayList();
+		String sql ="";
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select mov_title, mov_poster from movie where mov_title = %?%");
+			sql = "select mov_title, mov_poster from movie where mov_title like '%'||?||'%'";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, movieName);
 			
 			rs= pstmt.executeQuery();
-			
+			System.out.println("OK");
 			while(rs.next()) {
 				MovieInfoBean mb = new MovieInfoBean();
 				mb.setMOV_TITLE(rs.getString("mov_title"));
@@ -134,7 +136,11 @@ public List searchMovie(String movieName) {
 			
 			e.printStackTrace();
 		}finally {
-			
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
 		}
 		
 		return null;

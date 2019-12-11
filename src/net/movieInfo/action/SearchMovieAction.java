@@ -20,12 +20,11 @@ public class SearchMovieAction implements Action {
 	   	
 	   	List list = new ArrayList();
 	   	list = movieDAO.searchMovie(request.getParameter("query"));
-	   	
 	   	request.setAttribute("list", list);
 	   	
 	   	ActionForward forward = new ActionForward();
 	   	forward.setRedirect(false);
-	   	forward.setPath("./movie/bbb.jsp");
+	   	forward.setPath("/movie/selectMovie.If");
 	   	
 	   	return forward;
 	   	

@@ -53,7 +53,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/search/serchMovie.If")) {
+		}else if(command.equals("/serchMovie.If")) {
 			action = new SearchMovieAction();
 			try {
 				forward = action.execute(request, response);
