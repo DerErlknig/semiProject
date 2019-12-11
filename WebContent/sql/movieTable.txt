@@ -1,67 +1,90 @@
-/* ��ȭ */
+* 영화 */
 DROP TABLE movie 
 	CASCADE CONSTRAINTS;
 
-/* ��� */
+/* 기분 */
 DROP TABLE feeling 
 	CASCADE CONSTRAINTS;
 
-/* ��ȭ_��� */
+/* 영화_기분 */
 DROP TABLE movie_feeling 
 	CASCADE CONSTRAINTS;
 
-/* ��� */
+/* 장소 */
 DROP TABLE location 
 	CASCADE CONSTRAINTS;
 
-/* ��ȭ_��� */
-DROP TABLE movie_loction 
+/* 영화_장소 */
+DROP TABLE movie_location 
 	CASCADE CONSTRAINTS;
 
-/* ȸ�� ���� */
+/* 회원 정보 */
 DROP TABLE member 
 	CASCADE CONSTRAINTS;
 
-/* �帣 */
+/* 새 테이블 */
+DROP TABLE TABLE 
+	CASCADE CONSTRAINTS;
+
+/* 장르 */
 DROP TABLE genre 
 	CASCADE CONSTRAINTS;
 
-/* ��ȭ_�帣 */
+/* 영화_장르 */
 DROP TABLE movie_genre 
 	CASCADE CONSTRAINTS;
 
-/* �⿬�� */
+/* 배우 */
+DROP TABLE actor 
+	CASCADE CONSTRAINTS;
+
+/* 영화_배우 */
+DROP TABLE movie_actor 
+	CASCADE CONSTRAINTS;
+
+/* 감독 */
+DROP TABLE director 
+	CASCADE CONSTRAINTS;
+
+/* 출연진 */
 DROP TABLE staff 
 	CASCADE CONSTRAINTS;
 
-/* �Խ��� ���� */
+/* 게시판 정보 */
 DROP TABLE review 
 	CASCADE CONSTRAINTS;
 
-/* ��ȣ ���� */
+/* 선호 영화 */
+DROP TABLE TABLE7 
+	CASCADE CONSTRAINTS;
+
+/* 선호 정보 */
 DROP TABLE preference 
 	CASCADE CONSTRAINTS;
 
-/* ��ȭ */
+/* 영화 */
 CREATE TABLE movie (
-	mov_title VARCHAR2(20) NOT NULL, /* ��ȭ �̸� */
-	mov_date DATE NOT NULL, /* ������ */
-	mov_time NUMBER NOT NULL, /* �󿵽ð� */
-	mov_rating VARCHAR2(20) NOT NULL, /* ��û ���� */
-	mov_poster VARCHAR2(20) NOT NULL /* ������ */
+	mov_title VARCHAR2(40) NOT NULL, /* 영화 이름 */
+	mov_date DATE NOT NULL, /* 개봉일 */
+	mov_time NUMBER NOT NULL, /* 상영시간 */
+	mov_rating VARCHAR2(20) NOT NULL, /* 시청 연령 */
+	mov_story VARCHAR2(3000) NOT NULL, /* 줄거리 */
+	mov_poster VARCHAR2(40) NOT NULL /* 포스터 */
 );
 
-COMMENT ON TABLE movie IS '��ȭ';
+COMMENT ON TABLE movie IS '영화';
 
-COMMENT ON COLUMN movie.mov_title IS '��ȭ �̸�';
+COMMENT ON COLUMN movie.mov_title IS '영화 이름';
 
-COMMENT ON COLUMN movie.mov_date IS '������';
+COMMENT ON COLUMN movie.mov_date IS '개봉일';
 
-COMMENT ON COLUMN movie.mov_time IS '�󿵽ð�';
+COMMENT ON COLUMN movie.mov_time IS '상영시간';
 
-COMMENT ON COLUMN movie.mov_rating IS '��û ����';
+COMMENT ON COLUMN movie.mov_rating IS '시청 연령';
 
-COMMENT ON COLUMN movie.mov_poster IS '������';
+COMMENT ON COLUMN movie.mov_story IS '줄거리';
+
+COMMENT ON COLUMN movie.mov_poster IS '포스터';
 
 CREATE UNIQUE INDEX PK_movie
 	ON movie (
@@ -75,14 +98,14 @@ ALTER TABLE movie
 			mov_title
 		);
 
-/* ��� */
+/* 기분 */
 CREATE TABLE feeling (
-	feeling VARCHAR2(20) NOT NULL /* ��� */
+	feeling VARCHAR2(20) NOT NULL /* 기분 */
 );
 
-COMMENT ON TABLE feeling IS '���';
+COMMENT ON TABLE feeling IS '기분';
 
-COMMENT ON COLUMN feeling.feeling IS '���';
+COMMENT ON COLUMN feeling.feeling IS '기분';
 
 CREATE UNIQUE INDEX PK_feeling
 	ON feeling (
@@ -96,77 +119,77 @@ ALTER TABLE feeling
 			feeling
 		);
 
-/* ��ȭ_��� */
+/* 영화_기분 */
 CREATE TABLE movie_feeling (
-	mov_title VARCHAR2(20) NOT NULL, /* ��ȭ �̸� */
-	feeling VARCHAR2(20) /* ��� */
+	mov_title VARCHAR2(40) NOT NULL, /* 영화 이름 */
+	feeling VARCHAR2(20) /* 기분 */
 );
 
-COMMENT ON TABLE movie_feeling IS '��ȭ_���';
+COMMENT ON TABLE movie_feeling IS '영화_기분';
 
-COMMENT ON COLUMN movie_feeling.mov_title IS '��ȭ �̸�';
+COMMENT ON COLUMN movie_feeling.mov_title IS '영화 이름';
 
-COMMENT ON COLUMN movie_feeling.feeling IS '���';
+COMMENT ON COLUMN movie_feeling.feeling IS '기분';
 
-/* ��� */
+/* 장소 */
 CREATE TABLE location (
-	loction VARCHAR2(20) NOT NULL /* ��� */
+	location VARCHAR2(20) NOT NULL /* 장소 */
 );
 
-COMMENT ON TABLE location IS '���';
+COMMENT ON TABLE location IS '장소';
 
-COMMENT ON COLUMN location.loction IS '���';
+COMMENT ON COLUMN location.location IS '장소';
 
 CREATE UNIQUE INDEX PK_location
 	ON location (
-		loction ASC
+		location ASC
 	);
 
 ALTER TABLE location
 	ADD
 		CONSTRAINT PK_location
 		PRIMARY KEY (
-			loction
+			location
 		);
 
-/* ��ȭ_��� */
-CREATE TABLE movie_loction (
-	mov_title VARCHAR2(20) NOT NULL, /* ��ȭ �̸� */
-	loction VARCHAR2(20) /* ��� */
+/* 영화_장소 */
+CREATE TABLE movie_location (
+	mov_title VARCHAR2(40) NOT NULL, /* 영화 이름 */
+	location VARCHAR2(20) /* 장소 */
 );
 
-COMMENT ON TABLE movie_loction IS '��ȭ_���';
+COMMENT ON TABLE movie_location IS '영화_장소';
 
-COMMENT ON COLUMN movie_loction.mov_title IS '��ȭ �̸�';
+COMMENT ON COLUMN movie_location.mov_title IS '영화 이름';
 
-COMMENT ON COLUMN movie_loction.loction IS '���';
+COMMENT ON COLUMN movie_location.location IS '장소';
 
-/* ȸ�� ���� */
+/* 회원 정보 */
 CREATE TABLE member (
-	mem_id VARCHAR2(20) NOT NULL, /* ���̵� */
-	mem_name VARCHAR2(10) NOT NULL, /* �̸� */
-	mem_pw VARCHAR2(20) NOT NULL, /* ��� */
-	mem_address VARCHAR2(20) NOT NULL, /* �ּ� */
-	mem_birth DATE NOT NULL, /* ������� */
-	mem_gender VARCHAR2(6) NOT NULL, /* ���� */
-	mem_tel VARCHAR2(20) NOT NULL /* ��ȭ��ȣ */
+	mem_id VARCHAR2(20) NOT NULL, /* 아이디 */
+	mem_name VARCHAR2(10) NOT NULL, /* 이름 */
+	mem_pw VARCHAR2(20) NOT NULL, /* 비번 */
+	mem_address VARCHAR2(20) NOT NULL, /* 주소 */
+	mem_birth DATE NOT NULL, /* 생년월일 */
+	mem_gender VARCHAR2(6) NOT NULL, /* 성별 */
+	mem_tel VARCHAR2(20) NOT NULL /* 전화번호 */
 );
 
-COMMENT ON TABLE member IS 'ȸ�� ����';
+COMMENT ON TABLE member IS '회원 정보';
 
-COMMENT ON COLUMN member.mem_id IS '���̵�';
+COMMENT ON COLUMN member.mem_id IS '아이디';
 
-COMMENT ON COLUMN member.mem_name IS '�̸�';
+COMMENT ON COLUMN member.mem_name IS '이름';
 
-COMMENT ON COLUMN member.mem_pw IS '���';
+COMMENT ON COLUMN member.mem_pw IS '비번';
 
-COMMENT ON COLUMN member.mem_address IS '�ּ�';
+COMMENT ON COLUMN member.mem_address IS '주소';
 
-COMMENT ON COLUMN member.mem_birth IS '�������';
+COMMENT ON COLUMN member.mem_birth IS '생년월일';
 
-COMMENT ON COLUMN member.mem_gender IS '����';
+COMMENT ON COLUMN member.mem_gender IS '성별';
 
-COMMENT ON COLUMN member.mem_tel IS '��ȭ��ȣ';
+COMMENT ON COLUMN member.mem_tel IS '전화번호';
 
 CREATE UNIQUE INDEX PK_member
 	ON member (
@@ -180,14 +203,26 @@ ALTER TABLE member
 			mem_id
 		);
 
-/* �帣 */
-CREATE TABLE genre (
-	genre VARCHAR2(10) NOT NULL /* �帣 */
+/* 새 테이블 */
+CREATE TABLE TABLE (
+	mem_id VARCHAR2(20) NOT NULL, /* 아이디 */
+	mov_title VARCHAR2(40) /* 영화 이름 */
 );
 
-COMMENT ON TABLE genre IS '�帣';
+COMMENT ON TABLE TABLE IS '새 테이블';
 
-COMMENT ON COLUMN genre.genre IS '�帣';
+COMMENT ON COLUMN TABLE.mem_id IS '아이디';
+
+COMMENT ON COLUMN TABLE.mov_title IS '영화 이름';
+
+/* 장르 */
+CREATE TABLE genre (
+	genre VARCHAR2(20) NOT NULL /* 장르 */
+);
+
+COMMENT ON TABLE genre IS '장르';
+
+COMMENT ON COLUMN genre.genre IS '장르';
 
 CREATE UNIQUE INDEX PK_genre
 	ON genre (
@@ -201,32 +236,86 @@ ALTER TABLE genre
 			genre
 		);
 
-/* ��ȭ_�帣 */
+/* 영화_장르 */
 CREATE TABLE movie_genre (
-	mov_title VARCHAR2(20) NOT NULL, /* ��ȭ �̸� */
-	genre VARCHAR2(10) /* �帣 */
+	mov_title VARCHAR2(40) NOT NULL, /* 영화 이름 */
+	genre VARCHAR2(20) /* 장르 */
 );
 
-COMMENT ON TABLE movie_genre IS '��ȭ_�帣';
+COMMENT ON TABLE movie_genre IS '영화_장르';
 
-COMMENT ON COLUMN movie_genre.mov_title IS '��ȭ �̸�';
+COMMENT ON COLUMN movie_genre.mov_title IS '영화 이름';
 
-COMMENT ON COLUMN movie_genre.genre IS '�帣';
+COMMENT ON COLUMN movie_genre.genre IS '장르';
 
-/* �⿬�� */
+/* 배우 */
+CREATE TABLE actor (
+	actor VARCHAR2(20) NOT NULL /* 배우 */
+);
+
+COMMENT ON TABLE actor IS '배우';
+
+COMMENT ON COLUMN actor.actor IS '배우';
+
+CREATE UNIQUE INDEX PK_actor
+	ON actor (
+		actor ASC
+	);
+
+ALTER TABLE actor
+	ADD
+		CONSTRAINT PK_actor
+		PRIMARY KEY (
+			actor
+		);
+
+/* 영화_배우 */
+CREATE TABLE movie_actor (
+	mov_title VARCHAR2(40) NOT NULL, /* 영화 이름 */
+	actor VARCHAR2(20) /* 배우 */
+);
+
+COMMENT ON TABLE movie_actor IS '영화_배우';
+
+COMMENT ON COLUMN movie_actor.mov_title IS '영화 이름';
+
+COMMENT ON COLUMN movie_actor.actor IS '배우';
+
+/* 감독 */
+CREATE TABLE director (
+	director <지정 되지 않음> NOT NULL /* 감독 */
+);
+
+COMMENT ON TABLE director IS '감독';
+
+COMMENT ON COLUMN director.director IS '감독';
+
+CREATE UNIQUE INDEX PK_director
+	ON director (
+		director ASC
+	);
+
+ALTER TABLE director
+	ADD
+		CONSTRAINT PK_director
+		PRIMARY KEY (
+			director
+		);
+
+/* 출연진 */
 CREATE TABLE staff (
-	mov_title VARCHAR2(20) NOT NULL, /* ��ȭ �̸� */
-	director VARCHAR2(20) NOT NULL, /* ���� */
-	actors VARCHAR2(40) NOT NULL /* ��� */
+	mov_title VARCHAR2(40) NOT NULL, /* 영화 이름 */
+	director VARCHAR2(40) NOT NULL, /* 감독 */
+	actors VARCHAR2(100) NOT NULL /* 배우 */
 );
 
-COMMENT ON TABLE staff IS '�⿬��';
+COMMENT ON TABLE staff IS '출연진';
 
-COMMENT ON COLUMN staff.mov_title IS '��ȭ �̸�';
+COMMENT ON COLUMN staff.mov_title IS '영화 이름';
 
-COMMENT ON COLUMN staff.director IS '����';
+COMMENT ON COLUMN staff.director IS '감독';
 
-COMMENT ON COLUMN staff.actors IS '���';
+COMMENT ON COLUMN staff.actors IS '배우';
 
 CREATE UNIQUE INDEX PK_staff
 	ON staff (
@@ -240,41 +329,47 @@ ALTER TABLE staff
 			mov_title
 		);
 
-/* �Խ��� ���� */
+/* 게시판 정보 */
 CREATE TABLE review (
-	mov_title VARCHAR2(20) NOT NULL, /* ��ȭ �̸� */
-	mem_id VARCHAR2(20) NOT NULL, /* ���̵� */
-	review VARCHAR2(1000) NOT NULL, /* ������ */
-	star NUMBER NOT NULL, /* ���� */
-	rev_date DATE NOT NULL /* �ۼ��� */
+	mov_title VARCHAR2(40) NOT NULL, /* 영화 이름 */
+	mem_id VARCHAR2(20) NOT NULL, /* 아이디 */
+	review VARCHAR2(1000) NOT NULL, /* 한줄평 */
+	star NUMBER NOT NULL, /* 별점 */
+	rev_date DATE NOT NULL /* 작성일 */
 );
 
-COMMENT ON TABLE review IS '�Խ��� ����';
+COMMENT ON TABLE review IS '게시판 정보';
 
-COMMENT ON COLUMN review.mov_title IS '��ȭ �̸�';
+COMMENT ON COLUMN review.mov_title IS '영화 이름';
 
-COMMENT ON COLUMN review.mem_id IS '���̵�';
+COMMENT ON COLUMN review.mem_id IS '아이디';
 
-COMMENT ON COLUMN review.review IS '������';
+COMMENT ON COLUMN review.review IS '한줄평';
 
-COMMENT ON COLUMN review.star IS '����';
+COMMENT ON COLUMN review.star IS '별점';
 
-COMMENT ON COLUMN review.rev_date IS '�ۼ���';
+COMMENT ON COLUMN review.rev_date IS '작성일';
 
-/* ��ȣ ���� */
+/* 선호 영화 */
+CREATE TABLE TABLE7 (
+);
+
+COMMENT ON TABLE TABLE7 IS '선호 영화';
+
+/* 선호 정보 */
 CREATE TABLE preference (
-	mem_id VARCHAR2(20) NOT NULL, /* ���̵� */
-	loction VARCHAR2(20), /* ��� */
-	genre VARCHAR2(10) /* �帣 */
+	mem_id VARCHAR2(20) NOT NULL, /* 아이디 */
+	location VARCHAR2(20), /* 장소 */
+	genre VARCHAR2(20) /* 장르 */
 );
 
-COMMENT ON TABLE preference IS '��ȣ ����';
+COMMENT ON TABLE preference IS '선호 정보';
 
-COMMENT ON COLUMN preference.mem_id IS '���̵�';
+COMMENT ON COLUMN preference.mem_id IS '아이디';
 
-COMMENT ON COLUMN preference.loction IS '���';
+COMMENT ON COLUMN preference.location IS '장소';
 
-COMMENT ON COLUMN preference.genre IS '�帣';
+COMMENT ON COLUMN preference.genre IS '장르';
 
 CREATE UNIQUE INDEX PK_preference
 	ON preference (
@@ -308,19 +403,39 @@ ALTER TABLE movie_feeling
 			mov_title
 		);
 
-ALTER TABLE movie_loction
+ALTER TABLE movie_location
 	ADD
-		CONSTRAINT FK_location_TO_movie_loction
+		CONSTRAINT FK_location_TO_movie_location
 		FOREIGN KEY (
-			loction
+			location
 		)
 		REFERENCES location (
-			loction
+			location
 		);
 
-ALTER TABLE movie_loction
+ALTER TABLE movie_location
 	ADD
-		CONSTRAINT FK_movie_TO_movie_loction
+		CONSTRAINT FK_movie_TO_movie_location
+		FOREIGN KEY (
+			mov_title
+		)
+		REFERENCES movie (
+			mov_title
+		);
+
+ALTER TABLE TABLE
+	ADD
+		CONSTRAINT FK_member_TO_TABLE
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member (
+			mem_id
+		);
+
+ALTER TABLE TABLE
+	ADD
+		CONSTRAINT FK_movie_TO_TABLE
 		FOREIGN KEY (
 			mov_title
 		)
@@ -346,6 +461,26 @@ ALTER TABLE movie_genre
 		)
 		REFERENCES genre (
 			genre
+		);
+
+ALTER TABLE movie_actor
+	ADD
+		CONSTRAINT FK_movie_TO_movie_actor
+		FOREIGN KEY (
+			mov_title
+		)
+		REFERENCES movie (
+			mov_title
+		);
+
+ALTER TABLE movie_actor
+	ADD
+		CONSTRAINT FK_actor_TO_movie_actor
+		FOREIGN KEY (
+			actor
+		)
+		REFERENCES actor (
+			actor
 		);
 
 ALTER TABLE staff
@@ -392,10 +527,10 @@ ALTER TABLE preference
 	ADD
 		CONSTRAINT FK_location_TO_preference
 		FOREIGN KEY (
-			loction
+			location
 		)
 		REFERENCES location (
-			loction
+			location
 		);
 
 ALTER TABLE preference
