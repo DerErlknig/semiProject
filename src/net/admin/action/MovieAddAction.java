@@ -41,6 +41,12 @@ public class MovieAddAction implements Action {
 			info.setMOV_STORY(multi.getParameter("movie_story"));
 			info.setMOV_POSTER(multi.getFilesystemName((String)multi.getFileNames().nextElement()));
 			
+			info.setMOV_DIRECTOR(multi.getParameter("movie_director"));
+			info.setMOV_ACTOR(multi.getParameter("movie_actor"));
+			info.setMOV_FEEL(multi.getParameter("movie_feel"));
+			info.setMOV_LOC(multi.getParameter("movie_loc"));
+			
+			
 			int result=adminDAO.insertMovie(info);
 			
 			if(result<=0){

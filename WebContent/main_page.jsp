@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>main page</title>
-<link rel="stylesheet" href="animate.css">
+<link rel="stylesheet" href="./css/animate.css">
  <style>
  body{
 	padding:0;
@@ -102,7 +102,7 @@ div#background {
 		</table>
 	</div>
 	<div>
-		<table align="center" id="emotions">
+		<table align="center" id="emotions" >
 			<tr>
 				<td colspan="2">
 					<a href="#">
@@ -145,7 +145,12 @@ div#background {
 				</td>
 			</tr>
 		</table>
+		<jsp:include page="search/search.jsp"></jsp:include>
 	</div>
+
+		
+
+	
 	
 </body>
 </html>

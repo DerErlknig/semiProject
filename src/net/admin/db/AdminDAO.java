@@ -44,8 +44,33 @@ public class AdminDAO {
 			pstmt.setString(4, movie.getMOV_RATING());
 			pstmt.setString(5, movie.getMOV_STORY());
 			pstmt.setString(6, movie.getMOV_POSTER());
-			
 			result = pstmt.executeUpdate();
+			
+			sql="insert into staff values(?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, movie.getMOV_TITLE());
+			pstmt.setString(2, movie.getMOV_DIRECTOR());
+			pstmt.setString(3, movie.getMOV_ACTOR());
+			result = pstmt.executeUpdate();
+			
+			sql="insert into movie_feeling values(?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, movie.getMOV_TITLE());
+			pstmt.setString(2, movie.getMOV_FEEL());
+			result = pstmt.executeUpdate();
+			
+			sql="insert into movie_location values(?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, movie.getMOV_TITLE());
+			pstmt.setString(2, movie.getMOV_LOC());
+			result = pstmt.executeUpdate();
+			
+			sql="insert into movie_genre values(?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, movie.getMOV_TITLE());
+			pstmt.setString(2, movie.getMOV_GENRE());
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -56,6 +81,51 @@ public class AdminDAO {
 			}catch(Exception ex) {}
 		}
 		return result;
+		
+	}
+	
+	public OptionBean optionAdmin() {
+		List genre = new ArrayList();
+		List location = new ArrayList();
+		List feeling = new ArrayList();
+		String sql = "";
+		OptionBean options = new OptionBean();
+		try {
+			con = ds.getConnection();
+			sql = "select * from genre";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				genre.add(rs.getString(1));
+			}
+			sql = "select * from location";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				location.add(rs.getString(1));
+			}
+			sql = "select * from feeling";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				feeling.add(rs.getString(1));
+			}
+			options.setGenreOptionList(genre);
+			options.setLocOptionList(location);
+			options.setFeelOptionList(feeling);
+			
+			return options;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		
+		return null;
 		
 	}
 	

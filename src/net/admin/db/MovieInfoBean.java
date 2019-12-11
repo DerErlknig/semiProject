@@ -11,6 +11,11 @@ public class MovieInfoBean {
 	private String MOV_STORY;
 	private String MOV_POSTER;
 	
+	private String MOV_DIRECTOR;
+	private String MOV_ACTOR;
+	private String MOV_LOC;
+	private String MOV_FEEL;
+	
 	public String getMOV_TITLE() {
 		return MOV_TITLE;
 	}
@@ -52,6 +57,30 @@ public class MovieInfoBean {
 	}
 	public void setMOV_POSTER(String mOV_POSTER) {
 		MOV_POSTER = mOV_POSTER;
+	}
+	public String getMOV_DIRECTOR() {
+		return MOV_DIRECTOR;
+	}
+	public void setMOV_DIRECTOR(String mOV_DIRECTOR) {
+		MOV_DIRECTOR = mOV_DIRECTOR;
+	}
+	public String getMOV_ACTOR() {
+		return MOV_ACTOR;
+	}
+	public void setMOV_ACTOR(String mOV_ACTOR) {
+		MOV_ACTOR = mOV_ACTOR;
+	}
+	public String getMOV_LOC() {
+		return MOV_LOC;
+	}
+	public void setMOV_LOC(String mOV_LOC) {
+		MOV_LOC = mOV_LOC;
+	}
+	public String getMOV_FEEL() {
+		return MOV_FEEL;
+	}
+	public void setMOV_FEEL(String mOV_FEEL) {
+		MOV_FEEL = mOV_FEEL;
 	}
 	
 	

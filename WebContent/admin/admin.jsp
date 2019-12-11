@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="net.admin.db.*"  %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%
+	AdminDAO adDAO = new AdminDAO();
+	OptionBean options = new OptionBean();
+	options = adDAO.optionAdmin();
+	List<String> genreOption = options.getGenreOptionList();
+	List<String> feelOption = options.getFeelOptionList();
+	List<String> locOption = options.getLocOptionList();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,16 +44,16 @@
 			<tr>
 			<td width="196" height="30">
 				<p align="center">
-					<font size=2>카테고리</font>
+					<font size=2>장르</font>
 				</p>
 			</td>
 			<td width="346" height="30">
 				<select name="movie_genre" size="1">
-					<option value="thriler" selected>스릴러</option>
-					<option value="animation">애니메이션</option>
-					<option value="romance">로맨스</option>
-					<option value="comedy">코미디</option>
-					<option value="pants">액션</option>
+					<%	for(String genre : genreOption){%>
+					<option value="<%=genre %>" selected><%=genre %></option>
+					<%
+					}
+					%>
 				</select>
 			</td>
 			</tr>
@@ -48,6 +63,41 @@
 			</td>
 			<td><input type="text" name="movie_name"></td>
 		</tr>
+		
+		<tr>
+			<td width="196" height="30">
+				<p align="center">
+					<font size=2>연관 장소</font>
+				</p>
+			</td>
+			<td width="346" height="30">
+				<select name="movie_loc" size="1">
+					<%	for(String loc : locOption){%>
+					<option value="<%=loc %>" selected><%=loc %></option>
+					<%
+					}
+					%>
+				</select>
+			</td>
+			</tr>
+		
+			<tr>
+			<td width="196" height="30">
+				<p align="center">
+					<font size=2>기분</font>
+				</p>
+			</td>
+			<td width="346" height="30">
+				<select name="movie_feel" size="1">
+					<%	for(String feel : feelOption){%>
+					<option value="<%=feel %>" selected><%=feel %></option>
+					<%
+					}
+					%>
+				</select>
+			</td>
+			</tr>
+			
 		<tr>
 			<td>
 				<p align="center"><font size=2>연령가</font></p>
